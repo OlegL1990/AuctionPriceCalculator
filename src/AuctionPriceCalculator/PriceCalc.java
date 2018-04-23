@@ -20,6 +20,7 @@ public class PriceCalc {
     public MaxPriceAndAmount maxDeals(ArrayList<Request> buyRequests, ArrayList<Request> sellRequests){
        prices = getPrices(requests) ;
        int max = 0;
+       ArrayList<Float> goodPrices = new ArrayList<>();
        MaxPriceAndAmount maxPriceAndAmount = new MaxPriceAndAmount();
        for(Float price:prices){
            int buyAmount=0;
@@ -33,9 +34,20 @@ public class PriceCalc {
            int numberOfDeals = Math.min(buyAmount,sellAmount);
            if(numberOfDeals>max){
                max=numberOfDeals;
-               maxPriceAndAmount.setPrice(price);
                maxPriceAndAmount.setQuantity(max);
+               goodPrices.clear();
+               goodPrices.add(price);
            }
+           else if(numberOfDeals==max){
+               goodPrices.add(price);
+           }
+           float averagePrice=0;
+           for(int i = 0;i<goodPrices.size();i++)
+           {
+               averagePrice +=goodPrices.get(i);
+           }
+           averagePrice /=goodPrices.size();
+           maxPriceAndAmount.setPrice(averagePrice);
 
 
        }
