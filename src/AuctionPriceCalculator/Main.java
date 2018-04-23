@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        ArrayList<Request> requests = RequestsInput.getInput();
+        ArrayList<Request> requests = RequestsInput.input();
         ArrayList<Request> buyRequests = new ArrayList<>();
         ArrayList<Request> sellRequests = new ArrayList<>();
         for(Request a : requests){
